@@ -1,0 +1,224 @@
+public class Solution {
+    // error method we can get the string like "abcbb"
+    // public int lengthOfLongestSubstring(String s) {
+    //     int maxLength = 0;
+    //     int min = 0;
+    //     int max = 0;
+    //     String x = "";
+    //     if(s.length() > 1){
+    //       for(int i = 0; i < s.length(); i++){
+    //         String a = s.substring(i,i+1);
+    //         for(int j = i+1; j < s.length() && !a.equals(s.substring(j,j+1)); j++){
+    //             int len = j - i;
+    //             if(len > maxLength){
+    //                 maxLength = len;
+    //                 min = i;
+    //                 max = j;
+    //                 x = a;
+    //             }
+    //         }
+    //       }
+    //     }else{
+    //         maxLength = s.length();
+    //     }
+    //     System.out.println("i:"+min+",j:"+max+",x:"+x);
+    //     return maxLength;
+    // }
+    // The last test too long to work out,time out,so you must write one faster method...
+    // public int lengthOfLongestSubstring(String s) {
+    //     StringBuffer temp = new StringBuffer();
+    //     String result = "";
+    //     for(int i = 0; i < s.length(); i++){
+            
+    //         for(int j = i; j < s.length(); j++){
+                
+    //             String a = s.substring(j,j+1);
+                
+    //             if(temp.length()>0){
+    //                 Boolean hasSame = false;
+    //                 for(int x = 0; x < temp.length(); x++){
+    //                     if(a.equals(temp.substring(x,x+1))){
+    //                         hasSame = true;
+    //                         break;
+    //                     }
+    //                 }
+    //                 if(!hasSame){
+    //                      temp.append(a);
+    //                 }else{
+    //                     break;
+    //                 }
+    //             }else{
+    //                 temp.append(a);
+    //             }
+    //         }
+    //         if(temp.length() > result.length()){
+    //              result = String.valueOf(temp);
+    //              temp = new StringBuffer();
+    //         }else{
+    //              temp = new StringBuffer();
+    //         }
+    //     }
+    //   return result.length();
+    // }
+    // not ok again in the last case
+    //  public int lengthOfLongestSubstring(String s) {
+    //     String result = "";
+    //     for(int i = 0; i < s.length(); i++){
+    //         Integer maxLength = 0;
+    //         for(int j = i; j < s.length(); j++){
+                
+    //             String a = s.substring(j,j+1);
+    //             Integer len = j-i+1;
+    //             if(maxLength>0){
+    //                 Boolean hasSame = false;
+    //                 for(int x = i; x < j; x++){
+    //                     if(a.equals(s.substring(x,x+1))){
+    //                         hasSame = true;
+    //                         break;
+    //                     }
+    //                 }
+    //                 if(!hasSame){
+    //                   maxLength = len;
+    //                 }else{
+    //                   break;
+    //                 }
+    //             }else{
+    //                  maxLength = len;
+    //             }
+    //         }
+    //         if(maxLength > result.length()){
+    //              result = s.substring(i,i+maxLength);
+    //         }
+    //     }
+    //   return result.length();
+    // }
+    //not enough
+//      public int lengthOfLongestSubstring(String s) {
+//         String result = "";
+//         Integer start_index = 0;
+//         if(s.length()<2){
+//              result = s;
+//          }else{
+//             for(int i = 0; i < s.length(); i++){
+//             Integer maxLength = 0;
+//             start_index = i;
+//             for(int j = i+1; j < s.length(); j++){
+//                 String a = s.substring(j,j+1);
+//                 maxLength = j-i;
+//                 Boolean hasSame = false;
+//                 Integer sameIndex = 0;
+//                 for(int x = i; x < j; x++){
+//                     if(a.equals(s.substring(x,x+1))){
+//                       hasSame = true;
+//                       sameIndex = x;
+//                       break;
+//                     }
+//                  }
+//                  if(hasSame){
+//                     i = sameIndex;
+//                     break;
+//                  }else{
+//                     maxLength++;
+//                  }
+//           }
+//           if(maxLength > result.length()){
+//              System.out.println("i:"+start_index+",max:"+maxLength);
+//              result = s.substring(start_index,start_index+maxLength);
+//              System.out.println("result:"+result);
+//           }
+//      }
+                
+//     }
+//         return result.length();
+// }
+//130~121 NOT ENOUGTH
+//  public int lengthOfLongestSubstring(String s) {
+//         Integer start_index = 0;
+//         char[] ch=s.toCharArray();
+//         Integer result_length = 0;
+//         if(s.length()<2){
+//              result_length = s.length();
+//          }else{
+//              int count = 0;
+//             for(int i = 0; i < s.length(); i++){
+//           // System.out.print("i to:"+i+".");    
+//             count ++;
+//             Integer maxLength = 0;
+//             start_index = i;
+//             for(int j = i+1; j < s.length(); j++){
+//                 char a = ch[j];
+//                 maxLength = j-i;
+//                 Boolean hasSame = false;
+//                 Integer sameIndex = 0;
+//                 for(int x = i; x < j; x++){
+//                     if(a==ch[x]){
+//                       hasSame = true;
+//                       sameIndex = x;
+//                       break;
+//                     }
+//                  }
+//                  if(hasSame){
+//                   // i = sameIndex-1;//从重复的最后一个开始往后循环
+//                     break;
+//                  }else{
+//                     maxLength++;
+//                  }
+//           }
+//           if(maxLength > result_length){
+//              result_length = maxLength;
+//           }
+          
+//      }
+//          System.out.println("circle times:"+count);       
+//     }
+//         return result_length;
+// }
+// THIS ONE PASS
+//       public int lengthOfLongestSubstring(String s) {
+//         Set s_set = new HashSet(); 
+//         char[] ch=s.toCharArray();
+//         Integer result_length = 0;
+//         Integer maxLength = 0;
+//         if(s.length()<2){
+//              result_length = s.length();
+//          }else{
+//             int count = 0;
+//             for(int i = 0; i < s.length(); i++){
+//           // System.out.print("i to:"+i+".");    
+//             count ++;
+//             s_set.clear(); 
+//             maxLength = 0;
+//             s_set.add(ch[i]);
+//             for(int j = i+1; j < s.length(); j++){
+//                 maxLength = j-i;
+//                 s_set.add(ch[j]);
+//                 if(s_set.size()!=j-i+1){
+//                     break;
+//                 }else{
+//                   maxLength++;  //没有重复的情况，这里会直接BREAK掉，所以++，加上最后一位，如后还有元素，刚重新初始化为j-i
+//                 }
+//           }
+//           if(maxLength > result_length){
+//              result_length = maxLength;
+//           }
+          
+//      }
+//          System.out.println("circle times:"+count);       
+//     }
+//         return result_length;
+// }
+//THIS ONE IS COPY NIUBILITY...
+    public int lengthOfLongestSubstring(String s) {
+        if (s.length()==0) return 0;
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int max=0;
+        for (int i=0, j=0; i<s.length(); ++i){
+            if (map.containsKey(s.charAt(i))){
+                j = Math.max(j,map.get(s.charAt(i))+1);
+            }
+            map.put(s.charAt(i),i);
+            max = Math.max(max,i-j+1);
+        }
+        return max;
+    }
+}
