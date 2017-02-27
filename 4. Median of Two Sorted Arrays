@@ -1,0 +1,64 @@
+public class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int[] total = new int[nums1.length + nums2.length];
+        for(int i = 0; i < nums1.length + nums2.length; i++){
+            if(i < nums1.length){
+                total[i] = nums1[i];
+            }else{
+                total[i] = nums2[i - nums1.length];
+            }
+        }
+        int length = total.length;
+        MergeSort(total,0,length-1);
+        
+        double result = 0.0;
+        if(length%2 == 0){
+            result = (total[length/2-1] + total[length/2])/2.0;
+        }else{
+            result = total[(length-1)/2];
+        }
+        return result;
+    }
+    
+    private void MergeSort(int[] arr,int l, int r){
+        try{
+             if(l >= r){
+                return ;
+             }
+            int mid = (l + r)/2;
+            MergeSort(arr, l, mid);
+            MergeSort(arr, mid + 1, r);
+            Merge(arr, l, mid, r);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+       
+    }
+
+    private void Merge(int [] arr, int l, int mid, int r){
+       int[] temp = new int[r-l+1];
+       for(int i = l; i <= r; i++){
+           temp[i-l] = arr[i];
+       }
+       int i = l, j = mid+1;
+       for(int k = l; k <= r; k++){
+           if(i > mid){
+               arr[k] = temp[j - l];
+               j++;
+           }else if(j > r){
+               arr[k] = temp[i - l];
+               i++;
+           }else{
+               if(temp[i-l] < temp[j-l]){
+                   arr[k] = temp[i - l];
+                   i++;
+               }else{
+                   arr[k] = temp[j - l];
+                   j++;
+               }
+           }
+       }
+
+    }
+    
+}
